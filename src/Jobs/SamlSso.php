@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Jobs;
+namespace UnsaDev\SamlIdp\Jobs;
 
 use LightSaml\Helper;
 use Illuminate\Support\Arr;
@@ -27,12 +27,12 @@ use LightSaml\Model\Assertion\AttributeStatement;
 use LightSaml\Model\Assertion\AudienceRestriction;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Context\DeserializationContext;
-use CodeGreenCreative\SamlIdp\Contracts\SamlContract;
+use UnsaDev\SamlIdp\Contracts\SamlContract;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
 use LightSaml\Model\Assertion\EncryptedAssertionWriter;
-use CodeGreenCreative\SamlIdp\Traits\PerformsSingleSignOn;
-use CodeGreenCreative\SamlIdp\Events\Assertion as AssertionEvent;
-use CodeGreenCreative\SamlIdp\Exceptions\DestinationMissingException;
+use UnsaDev\SamlIdp\Traits\PerformsSingleSignOn;
+use UnsaDev\SamlIdp\Events\Assertion as AssertionEvent;
+use UnsaDev\SamlIdp\Exceptions\DestinationMissingException;
 
 class SamlSso implements SamlContract
 {

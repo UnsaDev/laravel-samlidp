@@ -1,9 +1,9 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Listeners;
+namespace UnsaDev\SamlIdp\Listeners;
 
 use Illuminate\Auth\Events\Authenticated;
-use CodeGreenCreative\SamlIdp\Jobs\SamlSso;
+use UnsaDev\SamlIdp\Jobs\SamlSso;
 
 class SamlAuthenticated
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Http\Controllers;
+namespace UnsaDev\SamlIdp\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use CodeGreenCreative\SamlIdp\Jobs\SamlSlo;
+use UnsaDev\SamlIdp\Jobs\SamlSlo;
 
 class LogoutController extends Controller
 {

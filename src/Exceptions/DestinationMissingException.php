@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Exceptions;
+namespace UnsaDev\SamlIdp\Exceptions;
 
 use Throwable;
 use InvalidArgumentException;

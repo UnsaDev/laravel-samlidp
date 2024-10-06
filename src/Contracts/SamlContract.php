@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Contracts;
+namespace UnsaDev\SamlIdp\Contracts;
 
 interface SamlContract
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeGreenCreative\SamlIdp\Jobs;
+namespace UnsaDev\SamlIdp\Jobs;
 
 use LightSaml\Helper;
 use Illuminate\Support\Arr;
@@ -15,7 +15,7 @@ use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\Model\Protocol\LogoutResponse;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Model\Context\DeserializationContext;
-use CodeGreenCreative\SamlIdp\Traits\PerformsSingleSignOn;
+use UnsaDev\SamlIdp\Traits\PerformsSingleSignOn;
 
 class SamlSlo
 {
