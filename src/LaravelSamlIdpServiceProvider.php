@@ -120,6 +120,7 @@ class LaravelSamlIdpServiceProvider extends ServiceProvider
     {
         Route::name('saml.')
             ->prefix('saml')
+            ->domain(config('app.domain.extranet'))
             ->namespace('UnsaDev\SamlIdp\Http\Controllers')
             ->middleware('web')->group(function () {
                 $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
