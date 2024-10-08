@@ -24,7 +24,7 @@ trait PerformsSingleSignOn
      */
     protected function init()
     {
-        $this->issuer = url(config('samlidp.issuer_uri'));
+        $this->issuer = route(config('samlidp.issuer_uri'));
         $this->certificate = $this->getCertificate();
         $this->private_key = $this->getKey();
         $this->digest_algorithm = config('samlidp.digest_algorithm', XMLSecurityDSig::SHA1);
