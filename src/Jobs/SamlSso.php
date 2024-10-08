@@ -201,7 +201,7 @@ class SamlSso implements SamlContract
 
         if (is_null($queryParams)) {
             $queryParams = [
-                'idp' => config('app.url'),
+                'idp' => route(config('samlidp.login_uri')),
             ];
         }
 
