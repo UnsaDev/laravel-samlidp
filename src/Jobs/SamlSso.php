@@ -201,7 +201,7 @@ class SamlSso implements SamlContract
 
         if (is_null($queryParams)) {
             $queryParams = [
-                'idp' => route(config('samlidp.login_uri')),
+                'idp' => 'https://' . parse_url(route(config('samlidp.login_uri')), PHP_URL_HOST),
             ];
         }
 
