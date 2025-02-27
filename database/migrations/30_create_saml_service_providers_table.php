@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laravel_samlidp_service_providers');
+        Schema::dropIfExists('samlidp_service_providers');
     }
 };
