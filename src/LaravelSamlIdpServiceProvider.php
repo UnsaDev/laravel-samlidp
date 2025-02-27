@@ -8,14 +8,14 @@ namespace UnsaDev\SamlIdp;
  * @license MIT
  */
 
-use UnsaDev\SamlIdp\Console\CreateCertificate;
-use UnsaDev\SamlIdp\Console\CreateServiceProvider;
-use UnsaDev\SamlIdp\Traits\EventMap;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Routing\Router;
+use UnsaDev\SamlIdp\Traits\EventMap;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Events\Dispatcher;
+use UnsaDev\SamlIdp\Console\CreateCertificate;
+use UnsaDev\SamlIdp\Console\CreateServiceProvider;
 
 class LaravelSamlIdpServiceProvider extends ServiceProvider
 {
@@ -30,6 +30,7 @@ class LaravelSamlIdpServiceProvider extends ServiceProvider
     {
         $this->registerEvents();
         $this->registerRoutes();
+        $this->registerMigrations();
         $this->registerResources();
         $this->registerBladeComponents();
     }
@@ -92,9 +93,7 @@ class LaravelSamlIdpServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerServices()
-    {
-    }
+    private function registerServices() {}
 
     /**
      * Loop through events and listeners provided by EventMap trait
@@ -150,5 +149,12 @@ class LaravelSamlIdpServiceProvider extends ServiceProvider
                 CreateServiceProvider::class,
             ]);
         }
+    }
+
+    private function registerMigrations()
+    {
+        $this->publishesMigrations([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ]);
     }
 }

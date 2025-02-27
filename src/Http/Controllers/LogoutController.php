@@ -6,9 +6,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use UnsaDev\SamlIdp\Jobs\SamlSlo;
+use UnsaDev\SamlIdp\Traits\PerformsSingleSignOn;
 
 class LogoutController extends Controller
 {
+    use PerformsSingleSignOn;
+
     /**
      * [index description]
      * @return [type] [description]
@@ -27,7 +30,7 @@ class LogoutController extends Controller
 
         // Need to broadcast to our other SAML apps to log out!
         // Loop through our service providers and "touch" the logout URL's
-        foreach (config('samlidp.sp') as $key => $sp) {
+        foreach ($this->getAllServiceProviders() as $key => $sp) {
             // Check if the service provider supports SLO
             if (!empty($sp['logout']) && !in_array($key, $request->session()->get('saml.slo', []))) {
                 // Push this SP onto the saml slo array

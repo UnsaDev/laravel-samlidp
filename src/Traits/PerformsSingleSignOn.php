@@ -9,6 +9,7 @@ use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
+use UnsaDev\SamlIdp\Models\SamlServiceProvider;
 
 trait PerformsSingleSignOn
 {
@@ -83,5 +84,25 @@ trait PerformsSingleSignOn
         $key = config('samlidp.key') ?: Storage::disk('samlidp')->get(config('samlidp.keyname', 'key.pem'));
 
         return KeyHelper::createPrivateKey($key, '', strpos($key, 'file://') === 0, XMLSecurityKey::RSA_SHA256);
+    }
+
+    protected function getServiceProviderConfigValue($request, string $configKey): mixed
+    {
+        if (config('samlidp.sp') === SamlServiceProvider::class) {
+            $serviceProvider = SamlServiceProvider::findOrFail($this->getServiceProvider($request));
+
+            return $serviceProvider->$configKey;
+        }
+
+        return config(sprintf('samlidp.sp.%s.%s', $this->getServiceProvider($request), $configKey));
+    }
+
+    public function getAllServiceProviders(): array
+    {
+        if (config('samlidp.sp') === SamlServiceProvider::class) {
+            return SamlServiceProvider::all()->toArray();
+        }
+
+        return config('samlidp.sp');
     }
 }

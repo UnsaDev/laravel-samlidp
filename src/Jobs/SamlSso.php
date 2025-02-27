@@ -97,7 +97,7 @@ class SamlSso implements SamlContract
                             auth($this->guard)
                                 ->user()
                                 ->__get(config('samlidp.email_field', 'email')),
-                            SamlConstants::NAME_ID_FORMAT_EMAIL
+                            config('samlidp.email_name_id', SamlConstants::NAME_ID_FORMAT_EMAIL)
                         )
                     )
                     ->addSubjectConfirmation(
@@ -172,7 +172,7 @@ class SamlSso implements SamlContract
 
     private function setDestination()
     {
-        $destination = config(sprintf('samlidp.sp.%s.destination', $this->getServiceProvider($this->authn_request)));
+        $destination = $this->getServiceProviderConfigValue($this->authn_request, 'destination');
 
         if (empty($destination)) {
             throw new DestinationMissingException(
@@ -197,7 +197,7 @@ class SamlSso implements SamlContract
 
     private function getQueryParams()
     {
-        $queryParams = config(sprintf('samlidp.sp.%s.query_params', $this->getServiceProvider($this->authn_request)));
+        $queryParams = $this->getServiceProviderConfigValue($this->authn_request, 'query_params');
 
         if (is_null($queryParams)) {
             $queryParams = [
@@ -210,7 +210,7 @@ class SamlSso implements SamlContract
 
     private function getSpCertificate()
     {
-        $spCertificate = config(sprintf('samlidp.sp.%s.certificate', $this->getServiceProvider($this->authn_request)));
+        $spCertificate = $this->getServiceProviderConfigValue($this->authn_request, 'certificate');
 
         return strpos($spCertificate, 'file://') === 0
             ? X509Certificate::fromFile($spCertificate)
@@ -224,9 +224,7 @@ class SamlSso implements SamlContract
      */
     private function encryptAssertion(): bool
     {
-        return config(
-            sprintf('samlidp.sp.%s.encrypt_assertion', $this->getServiceProvider($this->authn_request)),
-            config('samlidp.encrypt_assertion', true)
-        );
+        return $this->getServiceProviderConfigValue($this->authn_request, 'encrypt_assertion')
+            ?? config('samlidp.encrypt_assertion', true);
     }
 }
